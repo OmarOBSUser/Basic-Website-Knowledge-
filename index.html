@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Check</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #f4f4f4;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #0066cc;
+      color: white;
+      font-size: 16px;
+    }
+    #message {
+      margin-top: 14px;
+      font-weight: bold;
+    }
+    .shake {
+      animation: shake 0.5s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enter Password</h1>
+    <input id="passwordInput" type="password" placeholder="Password" />
+    <button id="checkBtn">Check Password</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const correctPassword = 'secret123';
+    const passwordInput = document.getElementById('passwordInput');
+    const checkBtn = document.getElementById('checkBtn');
+    const message = document.getElementById('message');
+
+    checkBtn.addEventListener('click', function() {
+      const typedPassword = passwordInput.value;
+      if (typedPassword === correctPassword) {
+        window.location.href = 'admin.html';
+      } else {
+        message.textContent = 'Password is not correct.';
+        message.style.color = 'red';
+        message.classList.remove('shake');
+        void message.offsetWidth;
+        message.classList.add('shake');
+      }
+    });
+
+    passwordInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        checkBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
